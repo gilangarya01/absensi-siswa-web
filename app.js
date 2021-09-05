@@ -1,5 +1,11 @@
 const express = require("express");
-const { loadSiswa, addData, findNIM, deleteSiswa } = require("./utils/system");
+const {
+  loadSiswa,
+  addData,
+  findNIM,
+  deleteSiswa,
+  editSiswa,
+} = require("./utils/system");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
@@ -38,7 +44,8 @@ app.get("/admin/edit/:nim", (req, res) => {
 });
 
 app.put("/admin", (req, res) => {
-  res.send(req.body);
+  editSiswa(req.body);
+  res.redirect("/admin");
 });
 
 app.post("/admin", (req, res) => {
@@ -48,7 +55,7 @@ app.post("/admin", (req, res) => {
 });
 
 app.delete("/admin", (req, res) => {
-  let test = deleteSiswa(req.body.nama);
+  deleteSiswa(req.body.nim);
   req.flash("msg", "Data berhasil dihapus");
   res.redirect("/admin");
 });
