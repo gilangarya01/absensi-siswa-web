@@ -5,6 +5,8 @@ const {
   findNIM,
   deleteSiswa,
   editSiswa,
+  dateNow,
+  checkDuplicate,
 } = require("./utils/system");
 const methodOverride = require("method-override");
 const session = require("express-session");
@@ -25,7 +27,8 @@ app.use(flash());
 
 app.get("/", (req, res) => {
   let datas = loadSiswa();
-  res.render("main", { datas });
+  let date = dateNow();
+  res.render("main", { datas, date });
 });
 
 app.get("/admin", (req, res) => {
@@ -40,12 +43,19 @@ app.get("/admin/add", (req, res) => {
 
 app.get("/admin/edit/:nim", (req, res) => {
   let data = findNIM(req.params.nim);
-  res.render("edit", { data });
+  let error = req.flash("error");
+  res.render("edit", { data, error });
 });
 
 app.put("/admin", (req, res) => {
-  editSiswa(req.body);
-  res.redirect("/admin");
+  if (checkDuplicate(req.body)) {
+    req.flash("error", "NIM sudah digunakan");
+    res.redirect(`/admin/edit/${req.body.tempNIM}`);
+  } else {
+    editSiswa(req.body);
+    req.flash("msg", "Data berhasil diubah");
+    res.redirect("/admin");
+  }
 });
 
 app.post("/admin", (req, res) => {

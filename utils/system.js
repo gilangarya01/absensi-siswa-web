@@ -20,17 +20,49 @@ function addData(req) {
 }
 
 function deleteSiswa(nim) {
-  let newData = loadSiswa().filter((data) => data.nim !== nim);
+  let datas = loadSiswa();
+  let newData = datas.filter((data) => data.nim !== nim);
+
   saveSiswa(newData);
 }
 
-function editSiswa(data) {
+function editSiswa(siswa) {
   let datas = loadSiswa();
-  let dataSiswa = datas.find((data) => data.nim === data.nim);
+  let dataSiswa = datas.find((data) => data.nim === siswa.tempNIM);
   let index = datas.indexOf(dataSiswa);
 
-  datas[index] = data;
+  delete siswa.tempNIM;
+  datas[index] = siswa;
   saveSiswa(datas);
 }
 
-module.exports = { loadSiswa, addData, deleteSiswa, findNIM, editSiswa };
+function checkDuplicate(siswa) {
+  let check = findNIM(siswa.nim);
+  console.log(siswa.tempNIM);
+  console.log(siswa.nim);
+  console.log(check);
+
+  if (siswa.tempNIM !== siswa.nim && check) {
+    return true;
+  }
+  return false;
+}
+
+function dateNow() {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+
+  return dd + "/" + mm + "/" + yyyy;
+}
+
+module.exports = {
+  loadSiswa,
+  addData,
+  deleteSiswa,
+  findNIM,
+  editSiswa,
+  dateNow,
+  checkDuplicate,
+};
