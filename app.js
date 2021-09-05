@@ -1,6 +1,9 @@
 const express = require("express");
-const { loadSiswa, addData, findNama } = require("./utils/system");
+const { loadSiswa, addData, findNIM, deleteSiswa } = require("./utils/system");
 const methodOverride = require("method-override");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 
 const app = express();
 const port = 3000;
@@ -9,6 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 
+// Flash Config
+app.use(cookieParser("secret"));
+app.use(session({ cookie: { maxAge: 6000 } }));
+app.use(flash());
+
 app.get("/", (req, res) => {
   let datas = loadSiswa();
   res.render("main", { datas });
@@ -16,20 +24,33 @@ app.get("/", (req, res) => {
 
 app.get("/admin", (req, res) => {
   let datas = loadSiswa();
-  res.render("admin", { datas });
+  let msg = req.flash("msg");
+  res.render("admin", { datas, msg });
 });
 
 app.get("/admin/add", (req, res) => {
   res.render("add");
 });
 
+app.get("/admin/edit/:nim", (req, res) => {
+  let data = findNIM(req.params.nim);
+  res.render("edit", { data });
+});
+
+app.put("/admin", (req, res) => {
+  res.send(req.body);
+});
+
 app.post("/admin", (req, res) => {
   addData(req.body);
+  req.flash("msg", "Data berhasil ditambahkan");
+  res.redirect("/admin");
 });
 
 app.delete("/admin", (req, res) => {
-  let test = findNama(req.body.nama);
-  res.send(test);
+  let test = deleteSiswa(req.body.nama);
+  req.flash("msg", "Data berhasil dihapus");
+  res.redirect("/admin");
 });
 
 app.listen(port, (req, res) => {

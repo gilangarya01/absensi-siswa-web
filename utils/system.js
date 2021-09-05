@@ -5,19 +5,27 @@ function loadSiswa() {
   return JSON.parse(data);
 }
 
-function writeSiswa(data) {
+function saveSiswa(data) {
   fs.writeFileSync("./data/siswa.json", JSON.stringify(data));
 }
 
 function findNama(nama) {
-  let datas = loadSiswa();
-  return datas.find((data) => data.nama === nama);
+  return loadSiswa().find((data) => data.nama === nama);
+}
+
+function findNIM(nim) {
+  return loadSiswa().find((data) => data.nim === nim);
 }
 
 function addData(req) {
   let datas = loadSiswa();
   datas.push(req);
-  writeSiswa(datas);
+  saveSiswa(datas);
 }
 
-module.exports = { loadSiswa, addData, findNama };
+function deleteSiswa(nama) {
+  let newData = loadSiswa().filter((data) => data.nama !== nama);
+  saveSiswa(newData);
+}
+
+module.exports = { loadSiswa, addData, deleteSiswa, findNIM };

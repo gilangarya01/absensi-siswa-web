@@ -57,7 +57,7 @@
             <h5 class="card-header">Tambah Siswa</h5>
             <div class="card-body">
               <div class="mb-3">
-                <form action="/admin" method="POST">
+                <form action="/admin?_method=PUT" method="POST">
                   <label for="formGroupExampleInput" class="form-label"
                     >Nama</label
                   >
@@ -66,16 +66,18 @@
                     class="form-control"
                     id="formGroupExampleInput"
                     name="nama"
+                    value="<%= data.nama %>"
                     required
                   />
                   <label for="formGroupExampleInput2" class="form-label"
                     >NIM</label
                   >
                   <input
-                    type="number"
+                    type="text"
                     class="form-control"
                     id="formGroupExampleInput2"
                     name="nim"
+                    value="<%= data.nim %>"
                     required
                   />
                   <a href="/admin" class="btn btn-secondary mt-3">Kembali</a>
