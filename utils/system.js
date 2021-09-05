@@ -38,9 +38,6 @@ function editSiswa(siswa) {
 
 function checkDuplicate(siswa) {
   let check = findNIM(siswa.nim);
-  console.log(siswa.tempNIM);
-  console.log(siswa.nim);
-  console.log(check);
 
   if (siswa.tempNIM !== siswa.nim && check) {
     return true;

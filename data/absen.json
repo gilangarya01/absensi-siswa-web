@@ -1,0 +1,19 @@
+[
+  {
+    "tanggal": "12/12/1200",
+    "absen": [
+      {
+        "nama": "Gilang",
+        "masuk": true,
+        "izin": false,
+        "alpa": false
+      },
+      {
+        "nama": "Galoe",
+        "masuk": false,
+        "izin": true,
+        "alpa": false
+      }
+    ]
+  }
+]

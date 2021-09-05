@@ -25,28 +25,38 @@ app.use(cookieParser("secret"));
 app.use(session({ cookie: { maxAge: 6000 } }));
 app.use(flash());
 
+// Home
 app.get("/", (req, res) => {
   let datas = loadSiswa();
   let date = dateNow();
   res.render("main", { datas, date });
 });
 
+// Add Data Absen
+app.post("/", (req, res) => {
+  res.send(req.body);
+});
+
+// Admin
 app.get("/admin", (req, res) => {
   let datas = loadSiswa();
   let msg = req.flash("msg");
   res.render("admin", { datas, msg });
 });
 
+// Add Form Siswa
 app.get("/admin/add", (req, res) => {
   res.render("add");
 });
 
+// Edit Form Siswa
 app.get("/admin/edit/:nim", (req, res) => {
   let data = findNIM(req.params.nim);
   let error = req.flash("error");
   res.render("edit", { data, error });
 });
 
+// Update Data Siswa
 app.put("/admin", (req, res) => {
   if (checkDuplicate(req.body)) {
     req.flash("error", "NIM sudah digunakan");
@@ -58,12 +68,14 @@ app.put("/admin", (req, res) => {
   }
 });
 
+// Add Data Siswa
 app.post("/admin", (req, res) => {
   addData(req.body);
   req.flash("msg", "Data berhasil ditambahkan");
   res.redirect("/admin");
 });
 
+// Delete Data Siswa
 app.delete("/admin", (req, res) => {
   deleteSiswa(req.body.nim);
   req.flash("msg", "Data berhasil dihapus");
