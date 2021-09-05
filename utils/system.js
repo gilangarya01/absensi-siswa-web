@@ -39,8 +39,14 @@ function editSiswa(siswa) {
 function checkDuplicate(siswa) {
   let check = findNIM(siswa.nim);
 
-  if (siswa.tempNIM !== siswa.nim && check) {
-    return true;
+  if (siswa.tempNIM) {
+    if (siswa.tempNIM !== siswa.nim && check) {
+      return true;
+    }
+  } else {
+    if (check) {
+      return true;
+    }
   }
   return false;
 }

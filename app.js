@@ -34,6 +34,7 @@ app.get("/", (req, res) => {
 
 // Add Data Absen
 app.post("/", (req, res) => {
+  // addAbsen(req.body);
   res.send(req.body);
 });
 
@@ -46,7 +47,8 @@ app.get("/admin", (req, res) => {
 
 // Add Form Siswa
 app.get("/admin/add", (req, res) => {
-  res.render("add");
+  let error = req.flash("error");
+  res.render("add", { error });
 });
 
 // Edit Form Siswa
@@ -70,9 +72,14 @@ app.put("/admin", (req, res) => {
 
 // Add Data Siswa
 app.post("/admin", (req, res) => {
-  addData(req.body);
-  req.flash("msg", "Data berhasil ditambahkan");
-  res.redirect("/admin");
+  if (checkDuplicate(req.body)) {
+    req.flash("error", "NIM sudah digunakan");
+    res.redirect(`/admin/add`);
+  } else {
+    addData(req.body);
+    req.flash("msg", "Data berhasil ditambahkan");
+    res.redirect("/admin");
+  }
 });
 
 // Delete Data Siswa
