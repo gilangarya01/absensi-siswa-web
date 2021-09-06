@@ -7,6 +7,7 @@ const {
   editSiswa,
   dateNow,
   checkDuplicate,
+  addAbsen,
 } = require("./utils/system");
 const methodOverride = require("method-override");
 const session = require("express-session");
@@ -34,8 +35,8 @@ app.get("/", (req, res) => {
 
 // Add Data Absen
 app.post("/", (req, res) => {
-  // addAbsen(req.body);
-  res.send(req.body);
+  addAbsen(req.body);
+  res.redirect("/");
 });
 
 // Admin
