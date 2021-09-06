@@ -60,45 +60,6 @@ function dateNow() {
   return dd + "/" + mm + "/" + yyyy;
 }
 
-function loadAbsen() {
-  let data = fs.readFileSync("./data/absen.json", "utf-8");
-  return JSON.parse(data);
-}
-
-function saveAbsen(data) {
-  fs.writeFileSync("./data/absen.json", JSON.stringify(data));
-}
-
-function addAbsen(data) {
-  let namas = data.nama;
-  let keterangan = namas
-    .map((nama) => data[nama])
-    .filter((ket) => ket !== undefined);
-
-  console.log(namas.length);
-  console.log(keterangan);
-
-  if (namas.length !== keterangan.length) {
-    return false;
-  }
-
-  let dataAbsen = loadAbsen();
-  let harian = {
-    tanggal: data.tanggal,
-    absen: [],
-  };
-  namas.map((nama, i) => {
-    harian.absen.push({
-      nama: nama,
-      nim: data.nim[i],
-      keterangan: data[nama],
-    });
-  });
-  dataAbsen.push(harian);
-  saveAbsen(dataAbsen);
-  return true;
-}
-
 module.exports = {
   loadSiswa,
   addData,
@@ -107,5 +68,4 @@ module.exports = {
   editSiswa,
   dateNow,
   checkDuplicate,
-  addAbsen,
 };

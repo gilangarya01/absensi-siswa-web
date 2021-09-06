@@ -1,4 +1,5 @@
 const express = require("express");
+
 const {
   loadSiswa,
   addData,
@@ -7,9 +8,12 @@ const {
   editSiswa,
   dateNow,
   checkDuplicate,
-  addAbsen,
-} = require("./utils/system");
+} = require("./utils/data");
+const { addAbsen } = require("./utils/absen");
+
 const methodOverride = require("method-override");
+
+// Flash Message
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
@@ -37,13 +41,9 @@ app.get("/", (req, res) => {
 
 // Add Data Absen
 app.post("/", (req, res) => {
-  if (addAbsen(req.body)) {
-    req.flash("msg", "Absen berhasil ditambahkan");
-    res.redirect("/");
-  } else {
-    req.flash("error", "Semua data belum terisi");
-    res.redirect("/");
-  }
+  addAbsen(req.body);
+  req.flash("msg", "Absen berhasil ditambahkan");
+  res.redirect("/");
 });
 
 // Admin
