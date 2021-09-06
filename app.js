@@ -30,13 +30,20 @@ app.use(flash());
 app.get("/", (req, res) => {
   let datas = loadSiswa();
   let date = dateNow();
-  res.render("main", { datas, date });
+  let msg = req.flash("msg");
+  let error = req.flash("error");
+  res.render("main", { datas, date, msg, error });
 });
 
 // Add Data Absen
 app.post("/", (req, res) => {
-  addAbsen(req.body);
-  res.redirect("/");
+  if (addAbsen(req.body)) {
+    req.flash("msg", "Absen berhasil ditambahkan");
+    res.redirect("/");
+  } else {
+    req.flash("error", "Semua data belum terisi");
+    res.redirect("/");
+  }
 });
 
 // Admin

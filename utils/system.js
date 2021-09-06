@@ -71,6 +71,16 @@ function saveAbsen(data) {
 
 function addAbsen(data) {
   let namas = data.nama;
+  let keterangan = namas
+    .map((nama) => data[nama])
+    .filter((ket) => ket !== undefined);
+
+  console.log(namas.length);
+  console.log(keterangan);
+
+  if (namas.length !== keterangan.length) {
+    return false;
+  }
 
   let dataAbsen = loadAbsen();
   let harian = {
@@ -86,6 +96,7 @@ function addAbsen(data) {
   });
   dataAbsen.push(harian);
   saveAbsen(dataAbsen);
+  return true;
 }
 
 module.exports = {
