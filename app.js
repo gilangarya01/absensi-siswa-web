@@ -97,6 +97,12 @@ app.delete("/admin", (req, res) => {
   res.redirect("/admin");
 });
 
+// History
+app.get("/history", (req, res) => {
+  let datas = loadSiswa();
+  res.render("history", { datas });
+});
+
 app.listen(port, (req, res) => {
   console.log(`Server listining in http://localhost:${port}`);
 });
