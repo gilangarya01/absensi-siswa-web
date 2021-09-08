@@ -10,6 +10,7 @@ const {
   checkDuplicate,
   addAbsen,
   sumKet,
+  deleteAbsen,
 } = require("./utils/data");
 
 const methodOverride = require("method-override");
@@ -94,6 +95,7 @@ app.post("/admin", (req, res) => {
 // Delete Data Siswa
 app.delete("/admin", (req, res) => {
   deleteSiswa(req.body.nim);
+  deleteAbsen(req.body.nim);
   req.flash("msg", "Data berhasil dihapus");
   res.redirect("/admin");
 });

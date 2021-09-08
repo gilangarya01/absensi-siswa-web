@@ -124,6 +124,22 @@ function sumKet() {
   return data;
 }
 
+function deleteAbsen(nim) {
+  console.log("OK");
+  // let datas = loadSiswa();
+  // let newData = datas.filter((data) => data.nim !== nim);
+
+  // saveSiswa(newData);
+
+  let datas = loadAbsen();
+  let data = [];
+  datas.map((data, i) => {
+    let newData = data["absen"].filter((siswa) => siswa.nim !== nim);
+    datas[i]["absen"] = newData;
+  });
+  saveAbsen(datas);
+}
+
 module.exports = {
   loadSiswa,
   addData,
@@ -134,4 +150,5 @@ module.exports = {
   checkDuplicate,
   addAbsen,
   sumKet,
+  deleteAbsen,
 };

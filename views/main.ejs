@@ -83,7 +83,13 @@
 
           <!-- Table -->
           <form action="/" method="post">
+            <% if (datas.length < 1) { %>
+            <button type="button" class="btn btn-secondary mb-3" disabled>
+              Simpan
+            </button>
+            <% } else { %>
             <button type="submit" class="btn btn-primary mb-3">Simpan</button>
+            <% } %>
             <table class="table text-center">
               <thead class="table-light">
                 <tr>

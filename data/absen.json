@@ -1,1 +1,30 @@
-[{"tanggal":"08/09/2021","absen":[{"nama":"Gilang","nim":"20410100060","keterangan":"masuk"},{"nama":"Ghani","nim":"20410100090","keterangan":"izin"}]},{"tanggal":"08/09/2021","absen":[{"nama":"Gilang","nim":"20410100060","keterangan":"masuk"},{"nama":"Ghani","nim":"20410100090","keterangan":"masuk"}]}]
+[
+  {
+    "tanggal": "08/09/2021",
+    "absen": [
+      { "nama": "Goni", "nim": "20410100090", "keterangan": "masuk" },
+      { "nama": "Gonina", "nim": "20410100055", "keterangan": "masuk" }
+    ]
+  },
+  {
+    "tanggal": "08/09/2021",
+    "absen": [
+      { "nama": "Goni", "nim": "20410100090", "keterangan": "izin" },
+      { "nama": "Gonina", "nim": "20410100055", "keterangan": "izin" }
+    ]
+  },
+  {
+    "tanggal": "08/09/2021",
+    "absen": [
+      { "nama": "Goni", "nim": "20410100090", "keterangan": "alpa" },
+      { "nama": "Gonina", "nim": "20410100055", "keterangan": "alpa" }
+    ]
+  },
+  {
+    "tanggal": "08/09/2021",
+    "absen": [
+      { "nama": "Goni", "nim": "20410100090", "keterangan": "masuk" },
+      { "nama": "Gonina", "nim": "20410100055", "keterangan": "izin" }
+    ]
+  }
+]
