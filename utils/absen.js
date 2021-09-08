@@ -33,8 +33,30 @@ function addAbsen(data) {
 
 function sumKet() {
   let dataAbsen = loadAbsen();
+  data = [];
+  // [masuk, izin, alpa]
+  ket = [0, 0, 0];
 
-  dataAbsen.map((harian) => {});
+  for (let i = 0; i < dataAbsen[0]["absen"].length; i++) {
+    data.push([...ket]);
+  }
+
+  dataAbsen.forEach((harian) => {
+    for (let i = 0; i < harian["absen"].length; i++) {
+      switch (harian["absen"][i]["keterangan"]) {
+        case "masuk":
+          data[i][0]++;
+          break;
+        case "izin":
+          data[i][1]++;
+          break;
+        case "alpa":
+          data[i][2]++;
+          break;
+      }
+    }
+  });
+  return data;
 }
 
-module.exports = { addAbsen };
+module.exports = { addAbsen, sumKet };

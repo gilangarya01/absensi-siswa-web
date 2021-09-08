@@ -9,7 +9,7 @@ const {
   dateNow,
   checkDuplicate,
 } = require("./utils/data");
-const { addAbsen } = require("./utils/absen");
+const { addAbsen, sumKet } = require("./utils/absen");
 
 const methodOverride = require("method-override");
 
@@ -100,7 +100,8 @@ app.delete("/admin", (req, res) => {
 // History
 app.get("/history", (req, res) => {
   let datas = loadSiswa();
-  res.render("history", { datas });
+  let dataKet = sumKet();
+  res.render("history", { datas, dataKet });
 });
 
 app.listen(port, (req, res) => {

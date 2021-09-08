@@ -65,14 +65,14 @@
               </tr>
             </thead>
             <tbody>
-              <% datas.forEach((data, i) => { %>
+              <% let no = 0 %> <% datas.forEach((data, i) => { %>
               <tr>
-                <th scope="row"><%= ++i %></th>
+                <th scope="row"><%= ++no %></th>
                 <td><%= data.nama %></td>
                 <td><%= data.nim %></td>
-                <td>3</td>
-                <td>5</td>
-                <td>1</td>
+                <td><%= dataKet[i][0] %></td>
+                <td><%= dataKet[i][1] %></td>
+                <td><%= dataKet[i][2] %></td>
               </tr>
               <% }) %>
             </tbody>
