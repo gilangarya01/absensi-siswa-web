@@ -65,7 +65,13 @@
               </tr>
             </thead>
             <tbody>
-              <% let no = 0 %> <% datas.forEach((data, i) => { %>
+              <% if (datas.length < 1) { %>
+              <tr>
+                <td colspan="6">
+                  <h5>Data Kosong</h5>
+                </td>
+              </tr>
+              <% } %> <% let no = 0 %> <% datas.forEach((data, i) => { %>
               <tr>
                 <th scope="row"><%= ++no %></th>
                 <td><%= data.nama %></td>

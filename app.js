@@ -8,8 +8,9 @@ const {
   editSiswa,
   dateNow,
   checkDuplicate,
+  addAbsen,
+  sumKet,
 } = require("./utils/data");
-const { addAbsen, sumKet } = require("./utils/absen");
 
 const methodOverride = require("method-override");
 

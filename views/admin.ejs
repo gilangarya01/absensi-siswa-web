@@ -88,7 +88,13 @@
               </tr>
             </thead>
             <tbody>
-              <% datas.forEach((data, i) => { %>
+              <% if (datas.length < 1) { %>
+              <tr>
+                <td colspan="4">
+                  <h5>Data Kosong</h5>
+                </td>
+              </tr>
+              <% } %> <% datas.forEach((data, i) => { %>
               <tr>
                 <th scope="row"><%= ++i %></th>
                 <td><%= data.nama %></td>

@@ -94,6 +94,14 @@
                 </tr>
               </thead>
               <tbody>
+                <% if (datas.length < 1) { %>
+                <tr>
+                  <td colspan="4">
+                    <h5>Data Kosong</h5>
+                  </td>
+                </tr>
+                <% } %>
+
                 <input type="hidden" name="tanggal" value="<%= date %>" />
                 <% datas.forEach((data, i) => { %>
                 <tr>
