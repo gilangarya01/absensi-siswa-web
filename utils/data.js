@@ -140,6 +140,10 @@ function deleteAbsen(nim) {
   saveAbsen(datas);
 }
 
+function newData() {
+  let data = 0;
+}
+
 module.exports = {
   loadSiswa,
   addData,
