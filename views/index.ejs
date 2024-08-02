@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Absensi Siswa</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-expand-lg"
+      style="background-color: #030264"
+      data-bs-theme="dark"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="/">Absensi</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/datasiswa">Data Siswa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/laporan">Laporan</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="container mt-4">
+      <h3>Daftar Siswa</h3>
+      <h6>Tgl : <%= date %></h6>
+      <% if (msg.length !== 0) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= msg %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      <% } %>
+      <form action="/" method="post">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nama</th>
+              <th scope="col">NIM</th>
+              <th scope="col">Absensi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <input type="hidden" name="tanggal" value="<%= date %>" />
+            <% datas.forEach((data, i)=> { %>
+            <tr>
+              <th scope="row"><%= i++ %></th>
+              <td><%= data.nama %></td>
+              <td><%= data.nim %></td>
+              <td>
+                <input type="hidden" name="nama" value="<%= data.nama %>" />
+                <input type="hidden" name="nim" value="<%= data.nim %>" />
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="<%= data.nama %>"
+                    id="inlineRadio1"
+                    value="masuk"
+                    required
+                  />
+                  <label class="form-check-label" for="inlineRadio1"
+                    >Masuk</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="<%= data.nama %>"
+                    id="inlineRadio2"
+                    value="izin"
+                    required
+                  />
+                  <label class="form-check-label" for="inlineRadio2"
+                    >Izin</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="<%= data.nama %>"
+                    id="inlineRadio3"
+                    value="alpa"
+                    required
+                  />
+                  <label class="form-check-label" for="inlineRadio2"
+                    >Alpa</label
+                  >
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% if (datas.length < 1) { %>
+        <button type="button" class="btn btn-secondary float-end" disabled>
+          Simpan
+        </button>
+        <% } else { %>
+        <button type="submit" class="btn btn-primary float-end">Simpan</button>
+        <% } %>
+      </form>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
