@@ -22,7 +22,7 @@ Pastikan memiliki `docker` pada environment
 1. Setelah clone, pindah ke folder project
 
 ```bash
-cd dinamika-e-catalog
+cd absensi-siswa-web
 ```
 
 2. Build docker image
